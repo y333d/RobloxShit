@@ -1,0 +1,12 @@
+l0=game.Players.LocalPlayer
+l1=l0.Character
+l2=l1.HumanoidRootPart
+l3=game:GetService("RunService")
+
+while l0.Character==l1 do
+    l3.Heartbeat:wait()
+    l4=l2.Velocity
+    l2.Velocity=l4+(l2.CFrame.LookVector*5e9)-Vector3.new(0,-5e9,0)
+    l3.RenderStepped:wait()
+    l2.Velocity=l4
+end
