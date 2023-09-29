@@ -1,0 +1,25 @@
+--this will reset your character to r15 without having to goto the site
+local A = game:GetService("AvatarEditorService")
+local P = game:GetService("Players")
+if not P.LocalPlayer.Character or not P.LocalPlayer.Character.Parent then
+    P.LocalPlayer.Character = P.LocalPlayer.CharacterAdded:Wait()
+end
+local H = P.LocalPlayer.Character:WaitForChild("Humanoid")
+local D = H:GetAppliedDescription():Clone()
+A:PromptSaveAvatar(D, Enum.HumanoidRigType.R15)
+local plr = P.LocalPlayer
+local InstanceNew = Instance.new
+local Destroy, Clone = game.Destroy, game.Clone
+local Char = plr.Character
+local Model = InstanceNew("Model")
+plr.Character = Model
+plr.Character = Char
+Destroy(Model)
+task.wait(plr.RespawnTime - 0.1)
+local j = plr.Character:GetPrimaryPartCFrame()
+plr.Character:BreakJoints()
+plr.CharacterAdded:Wait()
+plr.Character:WaitForChild("Humanoid")
+plr.Character:SetPrimaryPartCFrame(j)
+repeat task.wait() until plr.Character:FindFirstChild("ForceField")
+plr.Character.ForceField:remove()
