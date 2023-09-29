@@ -1,0 +1,23 @@
+local plr = game.Players.LocalPlayer
+local InstanceNew, Destroy, Clone = Instance.new, game.Destroy, game.Clone
+local Char = plr.Character
+local Model = InstanceNew("Model")
+
+plr.Character = Model
+plr.Character = Char
+Destroy(Model)
+
+task.wait(plr.RespawnTime - 0.1)
+
+local j = plr.Character:GetPrimaryPartCFrame()
+plr.Character:BreakJoints()
+
+plr.CharacterAdded:Wait()
+plr.Character:WaitForChild("Humanoid")
+plr.Character:SetPrimaryPartCFrame(j)
+
+repeat
+    task.wait()
+until plr.Character:FindFirstChild("ForceField")
+
+plr.Character.ForceField:remove()
