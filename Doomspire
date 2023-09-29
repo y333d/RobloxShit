@@ -1,0 +1,13 @@
+--og doomspire nuker the one with 500 players or smth
+_G.tp = true   
+while _G.tp == true do
+    local player = game.Players.LocalPlayer
+   local gun = require(game:GetService("Workspace")[player.Name]:WaitForChild("Rocket").Client.RocketClient)
+if gun then 
+gun["Diamater"] = 100 -- adjust here nigga
+gun["Speed"] = 60 --adjust here D:<
+else
+    wait(0.1)
+    end
+wait(0.1)
+end
