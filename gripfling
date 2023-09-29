@@ -1,0 +1,54 @@
+l0,l1,l2=game.Players.LocalPlayer,0,l0
+l2=l0.Character
+while true do
+    for i,v in pairs(l0.Backpack:GetChildren()) do
+        v.Parent = v.Name == "BoomBox" and l2 or v.Parent
+    end
+    wait(0.2)
+    for i,v in pairs(l2.Humanoid:GetPlayingAnimationTracks()) do
+        v:Stop()
+    end
+    for i,v in pairs(l2:GetChildren()) do
+        if string.find(v.Name:lower(), 'boomb') then
+            v.Grip = CFrame.new(-0.011, 0.633, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+            v.Parent = l2
+            v.Handle.Massless = true
+        end
+    end
+    wait(0.4)
+    local l3 = function(l4, l5, l6)
+        game:GetService("StarterGui"):SetCore("SendNotification", {Title = l4, Text = l5, Icon = "rbxassetid://2541869220", Duration = l6})
+    end
+    local l7 = game:GetService("Players")
+    local l8 = l7.LocalPlayer
+    local l9 = l8.Character
+    local l10
+    local l11
+    local l12
+    if l9 and l9.Name == l8.Name then
+        l10 = l9:FindFirstChildOfClass("Humanoid")
+    end
+    if l10 then
+        l11 = l10.RootPart
+    end
+    if l9:FindFirstChild("Head") then
+        l12 = l9.Head
+    end
+    if l10 and l11 then
+        l10:UnequipTools()
+        for _, l13 in next, l8.Backpack:GetChildren() do
+            if l13:IsA("Tool") then
+                if l13:FindFirstChild("Handle") then
+                    l13.Handle.Massless = true
+                end
+                local l14 = {}
+                l13.Grip = CFrame.new(5e3, 6e3, 2e3)
+                l13.Parent = l9
+                l13.Unequipped:Connect(function()
+                    l13.Grip = l14[_]
+                end)
+            end
+        end
+    end
+    wait(1)
+end
